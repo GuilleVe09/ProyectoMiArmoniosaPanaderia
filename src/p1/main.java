@@ -7,6 +7,7 @@ package p1;
 
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.*;
 /**
  *
  * @author guill
@@ -30,9 +32,9 @@ public class main {
         String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
         Connection con;
         Statement stmt;
-        Statement stmt2;
+        //Statement stmt2;
         ResultSet rs;
-        ResultSet rs2;
+        //ResultSet rs2;
         int cuentaD;
         String descripcion;
         float valor;
@@ -40,6 +42,7 @@ public class main {
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion;
+        
         
         
         try {
@@ -65,12 +68,12 @@ public class main {
         
         
         do{
-            
+            System.out.println("******************************************");
             System.out.println("Bienvenido a MI Armoniosa Panaderia");
             System.out.println("1. Cliente");
             System.out.println("2. Panadero");
             System.out.println("3. Salir");
-            
+            System.out.println("******************************************");
             //try{
                 
             System.out.println("Introduzca el numero de la opcion que prefiera:");
@@ -81,8 +84,8 @@ public class main {
                         int x = 0;
                         do{
                             System.out.println("Menu Cliente");
-                            System.out.println("\n 1.Iniciar Sesion");
-                            System.out.println("\n 2.Registrarse");
+                            System.out.println("\n 1.Registrarse");
+                            System.out.println("\n 2.Iniciar Sesion");
                             System.out.println("\n 3.Volver \n");
                             
                             System.out.println("Escoja una opcion");
@@ -90,10 +93,62 @@ public class main {
                             
                             switch(x){
                                 case 1:
+                                    String cedula;
+                                    String nombre;
+                                    String apellido;
+                                    String email;
+                                    String pFav;
+                                    String direc;
                                     
+                                    System.out.println("******************************************");
                                     System.out.println("Ingrese sus datos \n");
+                          
+                                    System.out.println("Cedula:");
+                                    cedula = sn.nextLine();
+                                    sn.nextLine();
+                                    //cedula = sn.next().charAt(10);
+                                    System.out.println("nombre:");
+                                    nombre = sn.nextLine();
+                                    sn.nextLine();
+                                    //nombre = sn.next().charAt(50);
+                                    System.out.println("apellido:");
+                                    apellido = sn.nextLine();
+                                    sn.nextLine();
+                                    //apellido = sn.next().charAt(50);
+                                    System.out.println("email:");
+                                    email = sn.nextLine();
+                                    sn.nextLine();
+                                    //email = sn.next().charAt(20);
+                                    System.out.println("Producto Favorito:");
+                                    pFav = sn.nextLine();
+                                    sn.nextLine();
+                                    //pFav = sn.next().charAt(20);
+                                    System.out.println("Direccion:");
+                                    direc = sn.nextLine();
+                                    //direc = sn.next().charAt(50);
+                                    
+                                
+                                    try {
+                                        con = DriverManager.getConnection(url, usuario, clave);
+                                        PreparedStatement pps = con.prepareStatement("INSERT INTO cliente(cedula,nombre,apellido,email,productoFavorito,direccion) VALUES(?,?,?,?,?,?)");
+                                        pps.setString(1, cedula);
+                                        pps.setString(2, nombre);
+                                        pps.setString(3, apellido);
+                                        pps.setString(4, email);
+                                        pps.setString(5, pFav);
+                                        pps.setString(6, direc);
+                                        pps.executeUpdate();
+                                        System.out.println("Datos guardados");
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                
+                                    
+                                    
+                                    System.out.println("******************************************");
                                     
                                     break;
+
                                     
                                 case 2:
                                     
