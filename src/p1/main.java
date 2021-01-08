@@ -64,17 +64,17 @@ public class main {
         */
         
         
-        while(!salir){
+        do{
             
             System.out.println("Bienvenido a MI Armoniosa Panaderia");
             System.out.println("1. Cliente");
             System.out.println("2. Panadero");
             System.out.println("3. Salir");
             
-            try{
+            //try{
                 
-                System.out.println("Introduzca el numero de la opcion que prefiera:");
-                opcion = sn.nextInt();
+            System.out.println("Introduzca el numero de la opcion que prefiera:");
+            opcion = sn.nextInt();
 
                 switch(opcion){
                     case 1:
@@ -125,13 +125,13 @@ public class main {
                         System.out.println("Las opciones son entre 1 y 3");
                 }
             
-            }catch(InputMismatchException e){
+            /*}catch(InputMismatchException e){
                 System.out.println("Debe introducir un numero");
                 sn.next();
-            }
+            }*/
             
             
-        }
+        }while(opcion < 3);
         
         System.out.println("Fin del menu");
         
