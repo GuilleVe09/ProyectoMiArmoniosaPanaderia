@@ -28,7 +28,7 @@ public class main {
     public static void main(String[] args) {
         // TODO code application logic here
         String usuario = "root";
-        String clave = "";
+        String clave = "1234";
         String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
         Connection con;
         Statement stmt;
@@ -102,26 +102,22 @@ public class main {
                                     
                                     System.out.println("******************************************");
                                     System.out.println("Ingrese sus datos \n");
-                          
-                                    System.out.println("Cedula:");
-                                    cedula = sn.nextLine();
-                                    sn.nextLine();
+                                    
+                                    cedula=sn.nextLine();
+                                    System.out.print("Cedula: ");
+                                    cedula=sn.nextLine();
                                     //cedula = sn.next().charAt(10);
                                     System.out.println("nombre:");
                                     nombre = sn.nextLine();
-                                    sn.nextLine();
                                     //nombre = sn.next().charAt(50);
                                     System.out.println("apellido:");
                                     apellido = sn.nextLine();
-                                    sn.nextLine();
                                     //apellido = sn.next().charAt(50);
                                     System.out.println("email:");
                                     email = sn.nextLine();
-                                    sn.nextLine();
                                     //email = sn.next().charAt(20);
                                     System.out.println("Producto Favorito:");
                                     pFav = sn.nextLine();
-                                    sn.nextLine();
                                     //pFav = sn.next().charAt(20);
                                     System.out.println("Direccion:");
                                     direc = sn.nextLine();
