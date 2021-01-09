@@ -50,5 +50,10 @@ public class ConexionBD {
             System.out.println(e.getMessage());
         }return con;
     }
+
+    public Connection getConection()
+    {
+        return con;
+    }
     
 }

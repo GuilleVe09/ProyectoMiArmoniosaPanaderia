@@ -28,7 +28,7 @@ public class main {
     public static void main(String[] args) {
         // TODO code application logic here
         String usuario = "root";
-        String clave = "1234";
+        String clave = "";
         String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
         Connection con;
         Statement stmt;
@@ -147,9 +147,32 @@ public class main {
 
                                     
                                 case 2:
-                                    
+                                    String id;
+                                    String name;
+
+                                    System.out.println("******************************************");
                                     System.out.println("Ingrese los datos de registro");
+
                                     
+                                    id = sn.nextLine();
+                                    System.out.println("Ingrese su cedula de identidad:");
+                                    id = sn.nextLine();
+                                    System.out.println("Ingrese su nombre:");
+                                    name = sn.nextLine();
+                                    
+
+                                    LoggedIn log = new LoggedIn();
+
+                                    if(log.validate(id, name, url, usuario, clave))
+                                    {
+                                        log.start();
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Nombre o numero de cedula incorrectos");
+                                    }
+
+
                                     break;
                                 default:
                                     
