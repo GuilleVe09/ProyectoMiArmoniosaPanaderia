@@ -107,7 +107,7 @@ public class LoggedIn extends ConexionBD
         }
         catch (Exception e)
         {
-            System.out.println("No hay coincidencias -> " + e);
+            System.out.println("Error en la comunicacion -> " + e);
         }
 
         return false;

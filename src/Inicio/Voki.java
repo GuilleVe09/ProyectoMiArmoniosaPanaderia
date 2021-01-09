@@ -2,6 +2,8 @@ package Inicio;
 
 import Cliente.LoggedIn;
 import Pastelero.Consulta;
+import Pastelero.P_LoggedIn;
+
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -33,6 +35,7 @@ public class Voki
         float valor;
         int pasteleroID;
         Scanner sn = new Scanner(System.in);
+        Scanner nu = new Scanner(System.in);
         boolean salir = false;
         int opcion;
         LoggedIn li;
@@ -182,7 +185,7 @@ public class Voki
                         }while(x < 3);
                         break;
 
-                    //Pastelero
+                    //Panadero
                     case 2:
                     do{
                         System.out.println("Menu Panadero");
@@ -193,7 +196,9 @@ public class Voki
                         System.out.println("Escoja una opcion");
                         x = sn.nextInt();
                         
-                        switch(x){
+                        switch(x)
+                        {
+                            //Registrar Panadero
                             case 1:
                                 String nombreP;
                                 String apellidoP;
@@ -242,7 +247,7 @@ public class Voki
                                 
                                 break;
 
-                                
+                            //Inicar sesion Panadero    
                             case 2:
                                 String id;
                                 String name;
@@ -257,13 +262,14 @@ public class Voki
                                 System.out.println("Ingrese su nombre:");
                                 name = sn.nextLine();
                                 
+                                P_LoggedIn pLog = new P_LoggedIn();
 
-                                LoggedIn log = new LoggedIn();
+                                int nid = Integer.parseInt(id);
 
-                                if(log.validate(id, name))
+                                if(pLog.P_validate(nid, name))
                                 //if(log.validate("203", "Enzo"))
                                 {
-                                    log.start();
+                                    pLog.start();
                                 }
                                 else
                                 {
