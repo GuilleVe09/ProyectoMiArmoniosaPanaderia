@@ -7,13 +7,14 @@ import java.util.Scanner;
 import javax.xml.transform.Result;
 
 import Inicio.ConexionBD;
+import java.sql.SQLException;
 
 public class P_LoggedIn extends ConexionBD
 {
     private int ID;
     private String firstName;
     private String lastName;
-    private String notification;
+    private int notification;
 
     public P_LoggedIn()
     {
@@ -22,11 +23,15 @@ public class P_LoggedIn extends ConexionBD
     //Interfaz visual del pastelero
     public void start()
     {
+        Consulta cns = new Consulta();
         int opcion;
         Scanner op = new Scanner(System.in);
 
         do
         {
+            Consulta consul = new Consulta();
+            this.notification = consul.getNumber(this.ID).size();
+
             System.out.println("Inicio de sesion exitoso!");
             System.out.println("******************************************");
             System.out.println("Bienvenido de vuelta "+this.firstName+" "+this.lastName);
@@ -47,7 +52,7 @@ public class P_LoggedIn extends ConexionBD
                     
                     break;    
                 case 2:
-
+                    obj.consultarPendientes(this.ID);
                     break;
             }
         }while(opcion < 3 & opcion > 0);
@@ -92,7 +97,19 @@ public class P_LoggedIn extends ConexionBD
     }
 
     //Metodo que cambia un pedido de estado
-    public void terminarPendiente()
+    public void terminarPendiente(int numero) throws SQLException
+    {
+        PreparedStatement prest = null;
+
+        String texto = "UPDATE pedido SET tipo = ? WHERE idPastelero = ? AND numero = ?";
+        prest = Conectar().prepareStatement(texto);
+        prest.setString(1, "Realizado");
+        prest.setInt(2, this.ID);
+        prest.setInt(3, numero);
+    }
+
+    //Metodo que cuenta los pedidos pendientes
+    public void setNotification()
     {
 
     }
