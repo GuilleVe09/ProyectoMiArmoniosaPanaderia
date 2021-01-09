@@ -13,11 +13,12 @@ import java.sql.SQLException;
  * @author guill
  */
 // Clase de conexion entre base de datos y netbeans
-public class ConexionBD {
-    String usuario = "root";
+public class ConexionBD 
+{
+    public static String usuario = "root";
     //Cambiar clave dependiendo de quien lo este usando
-    String clave = "";
-    String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
+    public static String clave = "";
+    public static String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
     Connection con;
     Statement stmt;
     
@@ -44,9 +45,14 @@ public class ConexionBD {
         }return con;
     }
 
-    public Connection getConection()
+    //Este metodo realiza la conenxion directamente
+    //Pero si necesitas otro tipo, crea un objeto tipo ConexionDB y usa las variables estaticas
+    //Lo hice asi para no tener la misma variable en dos partes diferentes
+    public Connection Conectar() throws SQLException
     {
-        return con;
+        ConexionBD cbd = new ConexionBD();
+        Connection conec = DriverManager.getConnection(cbd.url, cbd.usuario, cbd.clave);
+        return conec;
     }
     
 }
