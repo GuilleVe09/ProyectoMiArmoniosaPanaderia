@@ -10,15 +10,18 @@ import java.util.List;
 
 public class LoggedIn extends ConexionBD
 { 
+    //Constructor
     public LoggedIn()
     {
     }
 
+    //Interfaz de inicio de sesion
     public void start()
     {
         System.out.println("Inicio de sesion exitoso");
     }
 
+    //Metodo para validar si los datos coinciden
     public boolean validate(String id, String name, String url, String user, String password)
     {
         PreparedStatement pst = null;
