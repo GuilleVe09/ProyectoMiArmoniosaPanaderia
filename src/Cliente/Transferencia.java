@@ -18,6 +18,7 @@ public class Transferencia {
     
     public void realizarTransferencia()
     {
+        
         int cuentaD;
         String descripcion;
         float valor;
@@ -40,11 +41,14 @@ public class Transferencia {
         
         System.out.println("***************************************");
         System.out.println("Datos de la transferencia: ");
-        System.out.println(cuentaD);
-        System.out.println(valor);
-        System.out.println(descripcion);
+        System.out.println("Cuenta de destino: " + cuentaD);
+        System.out.println("Valor: " + valor);
+        System.out.println("Descripcion: " + descripcion);
         System.out.println("***************************************");
         
+        System.out.println("Transferencia realizada con exito \n");
+        
+        System.out.println("***************************************");
         
     }
     

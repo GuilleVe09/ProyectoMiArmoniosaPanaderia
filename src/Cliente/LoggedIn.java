@@ -50,6 +50,7 @@ public class LoggedIn extends ConexionBD
             {
                 case 1:
                     int idPan;
+                    String productos;
                     System.out.println("Tenemos los siguientes pasteleros disponibles:");
                     obj.pasteleroDisponible();
                     System.out.println("******************************************");
@@ -60,16 +61,23 @@ public class LoggedIn extends ConexionBD
                     System.out.println("Productos disponibles");
                     System.out.println("******************************************");
                     obj.pasteleroEscogido(idPan);
+                    op.nextLine();
+                    System.out.println("******************************************");
+                    System.out.println("Seleccione los productos para su pedido indicando su nombre y separandolos por comillas:");
+                    productos = op.nextLine();
+                    System.out.println("******************************************");
+                    System.out.println("Productos escogidos para pedido realizado!!!!");
                     tf.realizarTransferencia();
                     
                     
                     
                     
-                    
+                break;    
                 case 2:
                     System.out.println("Sus pedidos son:");
                     Consult cons = new Consult();
                     cons.realizarConsulta(this.id);
+                    break;
             }
         }while(opcion < 3 & opcion > 0);
     }
