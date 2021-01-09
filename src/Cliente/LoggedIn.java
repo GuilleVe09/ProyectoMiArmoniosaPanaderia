@@ -44,12 +44,28 @@ public class LoggedIn extends ConexionBD
             opcion = op.nextInt();
 
             Consulta obj = new Consulta();
+            Transferencia tf = new Transferencia();
 
             switch(opcion)
             {
                 case 1:
+                    int idPan;
                     System.out.println("Tenemos los siguientes pasteleros disponibles:");
                     obj.pasteleroDisponible();
+                    System.out.println("******************************************");
+                    System.out.println("Seleccione el panadero indicando su ID:");
+                    System.out.println("******************************************");
+                    idPan = op.nextInt();
+                    System.out.println("******************************************");
+                    System.out.println("Productos disponibles");
+                    System.out.println("******************************************");
+                    obj.pasteleroEscogido(idPan);
+                    tf.realizarTransferencia();
+                    
+                    
+                    
+                    
+                    
                 case 2:
                     System.out.println("Sus pedidos son:");
                     Consult cons = new Consult();

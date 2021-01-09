@@ -1,6 +1,7 @@
 package Inicio;
 
 import Cliente.LoggedIn;
+import Pastelero.Consulta;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -34,7 +35,7 @@ public class Voki
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion;
-        
+        LoggedIn li;
         
         
         try {
@@ -167,6 +168,9 @@ public class Voki
 
 
                                     break;
+                                    
+                          
+                             
                                 default:
                                     
                                     System.out.println("Volver atras");

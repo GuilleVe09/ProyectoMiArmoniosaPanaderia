@@ -52,4 +52,37 @@ public class Consulta
         }
     }
     
+    //Con este metodo se muestran los productos que tenga disponible el pastelero que el usuario escoja
+    public void pasteleroEscogido(int iDPastelero)
+    {
+        try {    
+                Connection con;
+                Statement stmt;
+                ResultSet rs;
+
+                ConexionBD cdb = new ConexionBD();
+            
+                try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                con = DriverManager.getConnection(cdb.url,cdb.usuario,cdb.clave);
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("Select nombre,precioU,precioM from relacion_pastelero_producto r join producto p on r.nombreProducto = p.nombre where idPastelero = "+iDPastelero);
+                rs.next();
+                String leftAlignFormat = " %-5s |%-15f | %-15f %n";
+                //String leftAlignFormat1 = " %-5s |%-15s | %-15s %n";
+                System.out.format("########################Informacion de productos############################%n");
+                do
+                {
+                    System.out.format(leftAlignFormat,rs.getString("nombre"),rs.getFloat("precioU"),rs.getFloat("precioM"));
+                }while(rs.next());
+                System.out.format("##############################################################%n");
+        } catch (SQLException ex) {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+    }
+    
 }
