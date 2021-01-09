@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class LoggedIn extends ConexionBD
 { 
     //Variables de instancia
-    String firstName;
-    String lastName;
-    String id;
+    private String firstName;
+    private String lastName;
+    private String id;
 
     //Constructor
     public LoggedIn()

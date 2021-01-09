@@ -72,7 +72,9 @@ public class Voki
             System.out.println("Introduzca el numero de la opcion que prefiera:");
             opcion = sn.nextInt();
 
-                switch(opcion){
+                switch(opcion)
+                {
+                    //Cliente
                     case 1:
                         int x = 0;
                         do{
@@ -180,11 +182,107 @@ public class Voki
                         }while(x < 3);
                         break;
 
+                    //Pastelero
                     case 2:
+                    do{
+                        System.out.println("Menu Panadero");
+                        System.out.println("1.Registrarse");
+                        System.out.println("2.Iniciar Sesion");
+                        System.out.println("3.Volver \n");
+                        
+                        System.out.println("Escoja una opcion");
+                        x = sn.nextInt();
+                        
+                        switch(x){
+                            case 1:
+                                String nombreP;
+                                String apellidoP;
+                                String pEstP;
+                                String direcP;
+                                
+                                System.out.println("******************************************");
+                                System.out.println("Ingrese sus datos \n");
+                                
+                                nombreP = sn.nextLine();
+                                //cedulaP = sn.next().charAt(10);
+                                System.out.println("nombre:");
+                                nombreP = sn.nextLine();
+                                //nombreP = sn.next().charAt(50);
+                                System.out.println("apellido:");
+                                apellidoP = sn.nextLine();
+                                //apellidoP = sn.next().charAt(50);
+                                System.out.println("Producto Favorito:");
+                                pEstP = sn.nextLine();
+                                //pEstP = sn.next().charAt(20);
+                                System.out.println("Direccion:");
+                                direcP = sn.nextLine();
+                                //direcP = sn.next().charAt(50);
+                                
+                            
+                                try
+                                {
+                                    con = DriverManager.getConnection(cdb.url, cdb.usuario, cdb.clave);
+                                    PreparedStatement pps = con.prepareStatement("INSERT INTO pastelero(id,nombre,apellido,productoEstrella,ubicacion) VALUES(?,?,?,?,?)");
+                                    pps.setInt(1, 0);
+                                    pps.setString(2, nombreP);
+                                    pps.setString(3, apellidoP);
+                                    pps.setString(4, pEstP);
+                                    pps.setString(5, direcP);
+                                    pps.executeUpdate();
+                                    System.out.println("Datos guardados");
+                                }
+                                catch (SQLException ex)
+                                {
+                                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            
+                                
+                                
+                                System.out.println("******************************************");
+                                
+                                break;
 
-                        System.out.println("2");
+                                
+                            case 2:
+                                String id;
+                                String name;
 
-                        break;
+                                System.out.println("******************************************");
+                                System.out.println("Ingrese los datos de registro");
+
+                                
+                                id = sn.nextLine();
+                                System.out.println("Ingrese su ID:");
+                                id = sn.nextLine();
+                                System.out.println("Ingrese su nombre:");
+                                name = sn.nextLine();
+                                
+
+                                LoggedIn log = new LoggedIn();
+
+                                if(log.validate(id, name))
+                                //if(log.validate("203", "Enzo"))
+                                {
+                                    log.start();
+                                }
+                                else
+                                {
+                                    System.out.println("Nombre o numero de cedula incorrectos");
+                                }
+
+
+                                break;
+                                
+                      
+                         
+                            default:
+                                
+                                System.out.println("Volver atras");
+                            
+                        }
+                    
+                    }while(x < 3);
+                    break;
 
 
                     case 3:
