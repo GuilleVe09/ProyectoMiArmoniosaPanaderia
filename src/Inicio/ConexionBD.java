@@ -17,7 +17,7 @@ public class ConexionBD
 {
     public static String usuario = "root";
     //Cambiar clave dependiendo de quien lo este usando
-    public static String clave = "";
+    public static String clave = "emelec";
     public static String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
     Connection con;
     Statement stmt;

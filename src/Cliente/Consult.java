@@ -58,4 +58,43 @@ public class Consult extends LoggedIn
         }
 
     }
+    
+    public void consultarCalificacion(String id)
+    {
+        try
+        {    
+            Connection con;
+            Statement stmt;
+            ResultSet rs;
+
+            ConexionBD cdb = new ConexionBD();
+        
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                con = DriverManager.getConnection(cdb.url,cdb.usuario,cdb.clave);
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM calificacion WHERE cedulaCliente = "+id);
+                rs.next();
+                String leftAlignFormat = " %-5d |%-15s | %-15s | %-15s | %-15s | %-15s | %-15s %n";
+                System.out.format("########################Informacion de calificacion############################%n");
+                //String leftAlignFormat1 = " %-5d |%-15s | %-15s | %-15s | %-15s | %-15s | %-15s %n";
+                //System.out.format(leftAlignFormat1,"id","valoracion General","Satisfaccion","Recomendacion","Recomendacion de cambio","Comentario","Cedula de cliente");
+                do
+                {
+                    System.out.format(leftAlignFormat,rs.getInt("id"),rs.getString("valoracionGeneral"),rs.getString("satisfaccion"),rs.getString("recomendacion"), rs.getString("recomendacionCambio"),rs.getString("comentario"),rs.getString("cedulaCliente"));
+                }while(rs.next());
+                System.out.format("##############################################################%n");
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
