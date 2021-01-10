@@ -126,7 +126,7 @@ public class P_LoggedIn extends ConexionBD
     {
         String usuario = "root";
         //Cambiar clave dependiendo de quien lo este usando
-        String clave = "emelec";
+        String clave = "";
         String url = "jdbc:mysql://localhost:3306/mi_armoniosa_panaderia";
         ConexionBD cdb = new ConexionBD();
         String nombre;
@@ -279,7 +279,9 @@ public class P_LoggedIn extends ConexionBD
             rs=stmt.executeQuery("Select nombre,cantidad,bosquejo,tipo,saborMasa,descripcion,precioU,precioM,tipoEmpaquetado,tipoConservado,alergenos,categoria,caracteristica from relacion_pastelero_producto r join producto p on r.nombreProducto = p.nombre where idPastelero = "+ID);
             rs.next();
             String leftAlignFormat = "# %-5s |%-15d | %-15s | %-15s | %-15s | %-15s | %-15f | %-15f | %-15s | %-15s | %-15s | %-15d | %-15d #%n";
+            String leftAlignFormat1 = "# %-5s |%-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s | %-15s #%n";
             System.out.format("########################Productos############################%n");
+            System.out.format(leftAlignFormat1,"nombre","cantidad","bosquejo","tipo","sabor de masa","descripcion","precio unitario","precio al por mayor","tipo de empaquetado","tipo de conservado","alergenos","categoria","caracteristica");
             do{
                 System.out.format(leftAlignFormat,rs.getString("nombre"),rs.getInt("cantidad"),rs.getString("bosquejo"),rs.getString("tipo"),rs.getString("saborMasa"),rs.getString("descripcion"),rs.getFloat("precioU"),rs.getFloat("precioM"),rs.getString("tipoEmpaquetado"),rs.getString("tipoConservado"),rs.getString("alergenos"),rs.getInt("categoria"),rs.getInt("caracteristica"));
             }while(rs.next());

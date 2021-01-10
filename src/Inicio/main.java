@@ -7,7 +7,6 @@ import java.sql.SQLException;
  * @author guill
  */
 public class main {
-
     /**
      * @param args the command line arguments
      */
