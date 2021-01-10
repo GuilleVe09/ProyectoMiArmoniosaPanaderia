@@ -18,6 +18,7 @@ public class LoggedIn extends ConexionBD
     private String firstName;
     private String lastName;
     private String id;
+    
 
     //Constructor
     public LoggedIn()
@@ -29,6 +30,7 @@ public class LoggedIn extends ConexionBD
     {
         int opcion;
         Scanner op = new Scanner(System.in);
+        String opcion2;
 
         do
         {
@@ -70,16 +72,8 @@ public class LoggedIn extends ConexionBD
                     System.out.println("Productos escogidos para pedido realizado!!!!");
                     tf.realizarTransferencia();
                     
-                    
-                    
-                    
-                break;    
-                case 2:
-                    System.out.println("Sus pedidos son:");
-                    Consult cons = new Consult();
-                    cons.realizarConsulta(this.id);
                     System.out.print("Escriba 1 si quiere calificar algun pedido: ");
-                    String opcion2=op.nextLine();
+                    opcion2=op.nextLine();
                         if (opcion2.equals("1")){
                         String pedido="";
                         boolean condi=true;
@@ -104,8 +98,19 @@ public class LoggedIn extends ConexionBD
                         System.out.print("Algun comentario extra: ");
                         String comentario=op.nextLine();
                         
+                        Consult cons = new Consult();
+                        
                         cons.califacar(pedido, calificacion, satisfaccion, recomendacion, recomendacionC, comentario);
                         }
+                    
+                    
+                    
+                break;    
+                case 2:
+                    System.out.println("Sus pedidos son:");
+                    Consult cons = new Consult();
+                    cons.realizarConsulta(this.id);
+                    
                 case 3:
                     System.out.println("Sus consultas realizadas son");
                     Consult cons2 = new Consult();
