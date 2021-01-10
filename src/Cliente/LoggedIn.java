@@ -37,6 +37,7 @@ public class LoggedIn extends ConexionBD
             System.out.println("Bienvenido de vuelta "+this.firstName+" "+this.lastName);
             System.out.println("1. Hacer pedido");
             System.out.println("2. Consultar pedido");
+            System.out.println("3. Consultar calificaciones realizadas");
             System.out.println("Para cerrar sesion presione cualquier otra tecla");
             System.out.println("******************************************");
 
@@ -78,8 +79,13 @@ public class LoggedIn extends ConexionBD
                     Consult cons = new Consult();
                     cons.realizarConsulta(this.id);
                     break;
+                case 3:
+                    System.out.println("Sus consultas realizadas son");
+                    Consult cons2 = new Consult();
+                    cons2.consultarCalificacion(id);
+                    break;
             }
-        }while(opcion < 3 & opcion > 0);
+        }while(opcion < 4 & opcion > 0);
     }
 
     //Metodo para validar si los datos coinciden
