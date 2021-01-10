@@ -18,6 +18,15 @@ import java.util.Calendar;
 
 public class Consult extends LoggedIn
 {
+    /*
+    Formatos
+    d -> entero
+    s -> texto
+    f -> decimal
+    n -> no especificado
+    t -> time
+    */
+
     public Consult()
     {
     }
@@ -43,14 +52,14 @@ public class Consult extends LoggedIn
             }
                 con = DriverManager.getConnection(cdb.url,cdb.usuario,cdb.clave);
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT monto,formaPago,tipo FROM pedido WHERE cedulaCliente = "+id);
+                rs = stmt.executeQuery("SELECT numero,monto,formaPago,tipo FROM pedido WHERE cedulaCliente = "+id);
                 rs.next();
-                String leftAlignFormat = " %-5d |%-15s | %-15s %n";
-                String leftAlignFormat1 = " %-5s |%-15s | %-15s %n";
-                System.out.format(leftAlignFormat1,"Monto","Forma de pago","Estado");
+                String leftAlignFormat = " %-15d |%-15d |%-15s | %-15s %n";
+                String leftAlignFormat1 = " %-15s |%-15s |%-15s | %-15s %n";
+                System.out.format(leftAlignFormat1,"Numero","Monto","Forma de pago","Estado");
                 do
                 {
-                    System.out.format(leftAlignFormat,rs.getInt("monto"),rs.getString("formaPago"),rs.getString("tipo"));
+                    System.out.format(leftAlignFormat,rs.getInt("numero"),rs.getInt("monto"),rs.getString("formaPago"),rs.getString("tipo"));
                 }while(rs.next());
         }
         catch (SQLException ex)
@@ -154,4 +163,26 @@ public class Consult extends LoggedIn
                 Logger.getLogger(Consult.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    //Este metodo permite al usuario cancelar una orden
+    public void cancelarPedido(int numero)
+    {
+        PreparedStatement prest = null;
+        ResultSet rst = null;
+
+        try
+        {
+            String texto = "UPDATE pedido SET tipo = ? WHERE numero = ?";
+            prest = Conectar().prepareStatement(texto);
+            prest.setString(1, "Cancelado");
+            prest.setInt(2, numero);
+
+            prest.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error en la comunicacion -> " + e);
+        }
+    }
+    
 }

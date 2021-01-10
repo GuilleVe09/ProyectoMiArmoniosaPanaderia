@@ -161,8 +161,8 @@ public class Voki
 
                                     LoggedIn log = new LoggedIn();
 
-                                    if(log.validate(id, name))
-                                    //if(log.validate("0908070605", "Erwin"))
+                                    //if(log.validate(id, name))
+                                    if(log.validate("0908070605", "Erwin"))
                                     {
                                         log.start();
                                     }

@@ -110,7 +110,29 @@ public class LoggedIn extends ConexionBD
                     System.out.println("Sus pedidos son:");
                     Consult cons = new Consult();
                     cons.realizarConsulta(this.id);
+
+                    String selection;
+
+                    selection = op.nextLine();
+                    System.out.println("Para cancelar un pedido presione 1");
+                    System.out.println("Para regresar presione otra tecla");
+                    selection = op.nextLine();
+
+                    while(selection.equals("1"))
+                    {
+                        System.out.println("Ingrese el numero de la orden que desea cancelar");
+                        String numeroo = op.nextLine();
+                        int numero = Integer.parseInt(numeroo);
+
+                        cons.cancelarPedido(numero);
+
+                        System.out.println("Para cancelar otro pedido presione 1");
+                        System.out.println("Para regresar presione otra tecla");
+                        selection = op.nextLine();
+                    }
                     
+                break;
+
                 case 3:
                     System.out.println("Sus consultas realizadas son");
                     Consult cons2 = new Consult();
@@ -149,6 +171,11 @@ public class LoggedIn extends ConexionBD
         }
 
         return false;
+    }
+    
+    public String getID()
+    {
+        return this.id;
     }
 
 }
