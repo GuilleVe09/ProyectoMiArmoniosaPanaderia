@@ -21,7 +21,7 @@ public class P_LoggedIn extends ConexionBD
     }
 
     //Interfaz visual del pastelero
-    public void start()
+    public void start() throws SQLException
     {
         Consulta cns = new Consulta();
         int opcion;
@@ -52,7 +52,26 @@ public class P_LoggedIn extends ConexionBD
                     
                     break;    
                 case 2:
+                    int numero;
+                    int eleccion;
+
                     obj.consultarPendientes(this.ID);
+
+                    System.out.println("Presione 1 para cumplir un pedido");
+                    System.out.println("Presione cualquier otra tecla para cancelar");
+
+                    eleccion = op.nextInt();
+
+                    do
+                    {
+                        System.out.println("Ingrese el codigo del pedido para terminarlo");
+                        numero = op.nextInt();
+                        terminarPendiente(numero);
+                        System.out.println("Ingrese 1 para terminar");
+                        eleccion = op.nextInt();
+                    }while(eleccion != 1);
+
+
                     break;
             }
         }while(opcion < 3 & opcion > 0);
@@ -100,18 +119,22 @@ public class P_LoggedIn extends ConexionBD
     public void terminarPendiente(int numero) throws SQLException
     {
         PreparedStatement prest = null;
+        ResultSet rst = null;
 
-        String texto = "UPDATE pedido SET tipo = ? WHERE idPastelero = ? AND numero = ?";
-        prest = Conectar().prepareStatement(texto);
-        prest.setString(1, "Realizado");
-        prest.setInt(2, this.ID);
-        prest.setInt(3, numero);
-    }
+        try
+        {
+            String texto = "UPDATE pedido SET tipo = ? WHERE idPastelero = ? AND numero = ?";
+            prest = Conectar().prepareStatement(texto);
+            prest.setString(1, "Realizado");
+            prest.setInt(2, this.ID);
+            prest.setInt(3, numero);
 
-    //Metodo que cuenta los pedidos pendientes
-    public void setNotification()
-    {
-
+            prest.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error en la comunicacion -> " + e);
+        }
     }
 
 }

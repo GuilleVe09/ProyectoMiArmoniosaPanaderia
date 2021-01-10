@@ -106,13 +106,13 @@ public class Consulta
             }
                 conn = DriverManager.getConnection(condb.url,condb.usuario,condb.clave);
                 stamt = conn.createStatement();
-                rslt = stamt.executeQuery("SELECT nombreProducto FROM relacion_pastelero_producto r join producto p on r.nombreProducto = p.nombre where idPastelero = "+idpast);
+                rslt = stamt.executeQuery("SELECT nombreProducto,numero FROM relacion_pedido_producto r join pedido p on r.numeroPedido = p.numero where idPastelero = "+idpast);
                 rslt.next();
-                String leftAlignFormat = "%-15s %n";
-                System.out.format(leftAlignFormat,"Producto");
+                String leftAlignFormat = "%-15s |%-15s %n";
+                System.out.format(leftAlignFormat,"Producto","Numero de pedido");
                 do
                 {
-                    System.out.format(leftAlignFormat,rslt.getString("nombreProducto"));
+                    System.out.format(leftAlignFormat,rslt.getString("nombreProducto"),rslt.getString("numero"));
                 }while(rslt.next());
         }
         catch (SQLException ex)
@@ -121,6 +121,7 @@ public class Consulta
         }
     }
 
+    //Conseguir el numero de notificaciones
     public ArrayList getNumber(int idpast)
     {
         ArrayList elementos = new ArrayList<String>();
