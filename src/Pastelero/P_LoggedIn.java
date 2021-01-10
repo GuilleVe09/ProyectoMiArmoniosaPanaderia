@@ -82,9 +82,9 @@ public class P_LoggedIn extends ConexionBD
                         System.out.println("Ingrese cualquier tecla para terminar");
                         eleccion = op.nextInt();
                     }
-
-
                     break;
+                case 3:
+                    consultarProductosPropios(this.ID);
             }
         }while(opcion < 4 & opcion > 0);
     }
