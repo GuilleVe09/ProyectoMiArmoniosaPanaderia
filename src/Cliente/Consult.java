@@ -185,4 +185,54 @@ public class Consult extends LoggedIn
         }
     }
     
+    public void guardarPedido(float monto, int idP, String cedula){
+            Connection con;
+            Statement stmt;
+            ResultSet rs;
+
+            ConexionBD cdb = new ConexionBD();
+        
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                
+                Calendar fecha = Calendar.getInstance();
+                int año = fecha.get(Calendar.YEAR);
+                int mes = fecha.get(Calendar.MONTH);
+                int dia = fecha.get(Calendar.DAY_OF_MONTH);
+                String fechai= año+"-"+mes+"-"+dia;
+                
+                
+                
+                con = DriverManager.getConnection(cdb.url,cdb.usuario,cdb.clave);
+                stmt = con.createStatement();
+                /*stmt.executeUpdate("insert into tipoEntrega(0,\"Domicilio\",\""+fechai+"\")");
+                rs= stmt.executeQuery("Select id from tipoEntrega where tipo=\"Domicilio\" and fecha=\""+fechai+"\")");
+                rs.next();
+                int idE=rs.getInt("id");*/
+                
+                PreparedStatement pps=con.prepareStatement("Insert into Pedido(numero,monto,formaPago,tipo,fechaPago,tipo_Pedido_Realizado,tipoEntrega,idPastelero,cedulaCliente) values(?,?,?,?,?,?,?,?,?)");
+                pps.setInt(1, 0);
+                pps.setFloat(2, monto);
+                pps.setString(3, "Transferencia");
+                pps.setString(4, "Pendiente");
+                pps.setString(5,fechai);
+                pps.setString(6, "RealizadosDiariamente");
+                pps.setInt(7, 301);
+                pps.setInt(8, idP);
+                pps.setString(9, cedula);
+                pps.executeUpdate();
+                
+                } catch (SQLException ex) {
+                Logger.getLogger(Consult.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        }
+    
 }
