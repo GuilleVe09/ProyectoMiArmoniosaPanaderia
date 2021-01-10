@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import Cliente.LoggedIn;
 import Inicio.ConexionBD;
 import Pastelero.Consulta;
+import java.util.Calendar;
 
 
 public class Consult extends LoggedIn
@@ -96,5 +97,61 @@ public class Consult extends LoggedIn
             Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void califacar(String pedido,String calificacion,String satisfaccion,String recomendacion,String recomendacionC,String comentario){
+        Connection con;
+            Statement stmt;
+            ResultSet rs;
+
+            ConexionBD cdb = new ConexionBD();
+        
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                String consulta="Select idPastelero,cedulaCliente from Pedido where numero="+pedido;
+                try {
+                con = DriverManager.getConnection(cdb.url,cdb.usuario,cdb.clave);
+                stmt = con.createStatement();
+            
+                rs=stmt.executeQuery(consulta);
+                rs.next();
+                int idpastelero=rs.getInt("idPastelero");
+                String clienteC=rs.getString("cedulaCliente");
+                
+                Calendar fecha = Calendar.getInstance();
+                int año = fecha.get(Calendar.YEAR);
+                int mes = fecha.get(Calendar.MONTH);
+                int dia = fecha.get(Calendar.DAY_OF_MONTH);
+                String fechai= año+"-"+mes+"-"+dia;
+                
+                PreparedStatement pps= con.prepareStatement("Insert Into Calificacion(id,valoracionGeneral,satisfaccion,recomendacion,recomendacionCambio,comentario,cedulaCliente) values(?,?,?,?,?,?,?)");
+                pps.setInt(1, 0);
+                pps.setString(2, calificacion);
+                pps.setString(3, satisfaccion);
+                pps.setString(4, recomendacion);
+                pps.setString(5, recomendacionC);
+                pps.setString(6, comentario);
+                pps.setString(7, clienteC);
+                pps.executeUpdate();
+                System.out.println("Calificado correctamente");
+                
+                consulta="Select id from Calificacion where valoracionGeneral=\""+calificacion+"\""+"and satisfaccion=\""+satisfaccion+"\""+"and recomendacion=\""+recomendacion+"\" and recomendacionCambio=\""+recomendacionC+"\" and comentario=\""+comentario+"\" and cedulaCliente=\""+clienteC+"\"";
+                rs=stmt.executeQuery(consulta);
+                rs.next();
+                int id = rs.getInt("id");
+                pps=con.prepareStatement("Insert Into Relacion_Pastelero_Calificacion(idPastelero,idCalificacion,fechaCalificacion) values(?,?,?)");
+                pps.setInt(1,idpastelero);
+                pps.setInt(2, id);
+                pps.setString(3, fechai );
+                pps.executeUpdate();
+                } catch (SQLException ex) {
+                Logger.getLogger(Consult.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -78,7 +78,34 @@ public class LoggedIn extends ConexionBD
                     System.out.println("Sus pedidos son:");
                     Consult cons = new Consult();
                     cons.realizarConsulta(this.id);
-                    break;
+                    System.out.print("Escriba 1 si quiere calificar algun pedido: ");
+                    String opcion2=op.nextLine();
+                        if (opcion2.equals("1")){
+                        String pedido="";
+                        boolean condi=true;
+                        do{
+                        try{
+                        System.out.print("Ingrese el id del pedido que quiere calificar: ");
+                        pedido =op.nextLine();
+                        int parse_numero = Integer.parseInt(pedido);
+                        condi=false;
+                        }catch(Exception e){
+                        System.out.println(pedido + " no es un id valido");
+                        }
+                        }while(condi);
+                        System.out.print("Ingrese calificacion de 1 al 5: ");
+                        String calificacion=op.nextLine();
+                        System.out.print("Nivel de Satisfaccion: ");
+                        String satisfaccion=op.nextLine();
+                        System.out.print("¿Se lo recomendaria a tus amigos? Si o No: ");
+                        String recomendacion=op.nextLine();
+                        System.out.print("Algun recomendacion: ");
+                        String recomendacionC=op.nextLine();
+                        System.out.print("Algun comentario extra: ");
+                        String comentario=op.nextLine();
+                        
+                        cons.califacar(pedido, calificacion, satisfaccion, recomendacion, recomendacionC, comentario);
+                        }
                 case 3:
                     System.out.println("Sus consultas realizadas son");
                     Consult cons2 = new Consult();
