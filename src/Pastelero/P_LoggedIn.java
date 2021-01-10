@@ -15,13 +15,15 @@ import java.sql.Connection;
 import java.sql.Statement;
 import static java.time.LocalDate.now;
 import java.util.Calendar;
+import java.sql.SQLException;
+
 
 public class P_LoggedIn extends ConexionBD
 {
     private int ID;
     private String firstName;
     private String lastName;
-    private String notification;
+    private int notification;
 
     public P_LoggedIn()
     {
@@ -30,17 +32,22 @@ public class P_LoggedIn extends ConexionBD
     //Interfaz visual del pastelero
     public void start()
     {
+        Consulta cns = new Consulta();
         int opcion;
         Scanner op = new Scanner(System.in);
 
         do
         {
+            Consulta consul = new Consulta();
+            this.notification = consul.getNumber(this.ID).size();
+
             System.out.println("Inicio de sesion exitoso!");
             System.out.println("******************************************");
             System.out.println("Bienvenido de vuelta "+this.firstName+" "+this.lastName);
             System.out.println("Tiene "+this.notification+" pedidos pendientes");
             System.out.println("1. Registrar producto");
             System.out.println("2. Ver pedidos pendientes");
+            System.out.println("3. Consultar productos propios");
             System.out.println("Para cerrar sesion presione cualquier otra tecla");
             System.out.println("******************************************");
 
@@ -56,11 +63,17 @@ public class P_LoggedIn extends ConexionBD
                     
                     break;    
                 case 2:
-                    consultarProductosPropios(this.ID);
+                    
+
+                    obj.consultarPendientes(this.ID);
 
                     break;
+                case 3:
+                    consultarProductosPropios(this.ID);
+                    
+                    break;
             }
-        }while(opcion < 3 & opcion > 0);
+        }while(opcion < 4 & opcion > 0);
     }
 
     //Validar pastelero
@@ -213,7 +226,19 @@ public class P_LoggedIn extends ConexionBD
     }
 
     //Metodo que cambia un pedido de estado
-    public void terminarPendiente()
+    public void terminarPendiente(int numero) throws SQLException
+    {
+        PreparedStatement prest = null;
+
+        String texto = "UPDATE pedido SET tipo = ? WHERE idPastelero = ? AND numero = ?";
+        prest = Conectar().prepareStatement(texto);
+        prest.setString(1, "Realizado");
+        prest.setInt(2, this.ID);
+        prest.setInt(3, numero);
+    }
+
+    //Metodo que cuenta los pedidos pendientes
+    public void setNotification()
     {
 
     }

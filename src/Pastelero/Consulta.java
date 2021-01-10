@@ -84,5 +84,79 @@ public class Consulta
         }    
         
     }
+
+    //Este metodo muestra los pendientes del pastelero
+    public void consultarPendientes(int idpast)
+    {
+        try
+        {    
+            Connection conn;
+            Statement stamt;
+            ResultSet rslt;
+
+            ConexionBD condb = new ConexionBD();
+        
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                conn = DriverManager.getConnection(condb.url,condb.usuario,condb.clave);
+                stamt = conn.createStatement();
+                rslt = stamt.executeQuery("SELECT nombreProducto FROM relacion_pastelero_producto r join producto p on r.nombreProducto = p.nombre where idPastelero = "+idpast);
+                rslt.next();
+                String leftAlignFormat = "%-15s %n";
+                System.out.format(leftAlignFormat,"Producto");
+                do
+                {
+                    System.out.format(leftAlignFormat,rslt.getString("nombreProducto"));
+                }while(rslt.next());
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ArrayList getNumber(int idpast)
+    {
+        ArrayList elementos = new ArrayList<String>();
+
+        try
+        {    
+            Connection conn;
+            Statement stamt;
+            ResultSet rslt;
+
+            ConexionBD condb = new ConexionBD();
+        
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                conn = DriverManager.getConnection(condb.url,condb.usuario,condb.clave);
+                stamt = conn.createStatement();
+                rslt = stamt.executeQuery("SELECT nombreProducto FROM relacion_pastelero_producto r join producto p on r.nombreProducto = p.nombre where idPastelero = "+idpast);
+                rslt.next();
+                do
+                {
+                    elementos.add(rslt.getString("nombreProducto"));
+                }while(rslt.next());
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return elementos;
+    }
+
     
 }

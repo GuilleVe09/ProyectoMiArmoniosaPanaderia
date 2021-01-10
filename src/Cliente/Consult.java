@@ -21,6 +21,7 @@ public class Consult extends LoggedIn
     {
     }
 
+    //Este metodo muestra los pedidos del cliente
     public void realizarConsulta(String id)
     {
         try
