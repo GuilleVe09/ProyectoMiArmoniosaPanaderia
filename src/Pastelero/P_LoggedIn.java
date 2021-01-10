@@ -62,14 +62,15 @@ public class P_LoggedIn extends ConexionBD
 
                     eleccion = op.nextInt();
 
-                    do
+                    while(eleccion == 1)
                     {
                         System.out.println("Ingrese el codigo del pedido para terminarlo");
                         numero = op.nextInt();
                         terminarPendiente(numero);
-                        System.out.println("Ingrese 1 para terminar");
+                        System.out.println("Ingrese 1 para terminar otro pedido");
+                        System.out.println("Ingrese cualquier tecla para terminar");
                         eleccion = op.nextInt();
-                    }while(eleccion != 1);
+                    }
 
 
                     break;
