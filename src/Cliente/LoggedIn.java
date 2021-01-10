@@ -76,11 +76,11 @@ public class LoggedIn extends ConexionBD
                     tf.realizarTransferencia();
                     
                     
-                        }
+                        
                     
                     
                     
-                break;    
+                break;
                 case 2:
                     System.out.println("Sus pedidos son:");
                     Consult cons = new Consult();
@@ -132,12 +132,9 @@ public class LoggedIn extends ConexionBD
                         System.out.print("Algun comentario extra: ");
                         String comentario=op.nextLine();
                         
-                        Consult cons = new Consult();
-                        
                         cons.califacar(pedido, calificacion, satisfaccion, recomendacion, recomendacionC, comentario);
-                    
+            }
                 break;
-
                 case 3:
                     System.out.println("Sus consultas realizadas son");
                     Consult cons2 = new Consult();
