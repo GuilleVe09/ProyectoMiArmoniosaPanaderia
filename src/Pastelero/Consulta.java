@@ -167,4 +167,33 @@ public class Consulta
         return elementos;
     }
 
+     public float retornarMonto(String Nproducto){
+           try
+        {    
+            Connection conn;
+            Statement stamt;
+            ResultSet rslt;
+
+            ConexionBD condb = new ConexionBD();
+        
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                conn = DriverManager.getConnection(condb.url,condb.usuario,condb.clave);
+                stamt = conn.createStatement();
+                rslt=stamt.executeQuery("Select precioU from producto where nombre=\""+Nproducto+"\"");
+                rslt.next();
+                return rslt.getFloat("precioU");
+             }
+         catch (SQLException ex)
+         {
+         Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+         }
+       return 0;
+}
 }
