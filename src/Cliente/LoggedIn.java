@@ -70,7 +70,41 @@ public class LoggedIn extends ConexionBD
                     productos = op.nextLine();
                     System.out.println("******************************************");
                     System.out.println("Productos escogidos para pedido realizado!!!!");
+                    Consult cs=new Consult();
+                    float monto=obj.retornarMonto(productos);
+                    cs.guardarPedido(monto, idPan, this.id);
                     tf.realizarTransferencia();
+                    
+                    
+                        }
+                    
+                    
+                    
+                break;    
+                case 2:
+                    System.out.println("Sus pedidos son:");
+                    Consult cons = new Consult();
+                    cons.realizarConsulta(this.id);
+
+                    String selection;
+
+                    selection = op.nextLine();
+                    System.out.println("Para cancelar un pedido presione 1");
+                    System.out.println("Para regresar presione otra tecla");
+                    selection = op.nextLine();
+
+                    while(selection.equals("1"))
+                    {
+                        System.out.println("Ingrese el numero de la orden que desea cancelar");
+                        String numeroo = op.nextLine();
+                        int numero = Integer.parseInt(numeroo);
+
+                        cons.cancelarPedido(numero);
+
+                        System.out.println("Para cancelar otro pedido presione 1");
+                        System.out.println("Para regresar presione otra tecla");
+                        selection = op.nextLine();
+                    }
                     
                     System.out.print("Escriba 1 si quiere calificar algun pedido: ");
                     opcion2=op.nextLine();
@@ -101,35 +135,6 @@ public class LoggedIn extends ConexionBD
                         Consult cons = new Consult();
                         
                         cons.califacar(pedido, calificacion, satisfaccion, recomendacion, recomendacionC, comentario);
-                        }
-                    
-                    
-                    
-                break;    
-                case 2:
-                    System.out.println("Sus pedidos son:");
-                    Consult cons = new Consult();
-                    cons.realizarConsulta(this.id);
-
-                    String selection;
-
-                    selection = op.nextLine();
-                    System.out.println("Para cancelar un pedido presione 1");
-                    System.out.println("Para regresar presione otra tecla");
-                    selection = op.nextLine();
-
-                    while(selection.equals("1"))
-                    {
-                        System.out.println("Ingrese el numero de la orden que desea cancelar");
-                        String numeroo = op.nextLine();
-                        int numero = Integer.parseInt(numeroo);
-
-                        cons.cancelarPedido(numero);
-
-                        System.out.println("Para cancelar otro pedido presione 1");
-                        System.out.println("Para regresar presione otra tecla");
-                        selection = op.nextLine();
-                    }
                     
                 break;
 
