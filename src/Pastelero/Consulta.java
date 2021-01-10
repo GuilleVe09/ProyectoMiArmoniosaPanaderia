@@ -125,6 +125,7 @@ public class Consulta
     }
 
     //Conseguir el numero de notificaciones
+    //Conseguir el numero de notificaciones
     public ArrayList getNumber(int idpast)
     {
         ArrayList elementos = new ArrayList<String>();
@@ -147,11 +148,15 @@ public class Consulta
             }
                 conn = DriverManager.getConnection(condb.url,condb.usuario,condb.clave);
                 stamt = conn.createStatement();
-                rslt = stamt.executeQuery("SELECT nombreProducto FROM relacion_pastelero_producto r join producto p on r.nombreProducto = p.nombre where idPastelero = "+idpast);
+                rslt = stamt.executeQuery("SELECT nombreProducto,numero,tipo FROM relacion_pedido_producto r join pedido p on r.numeroPedido = p.numero where idPastelero = "+idpast);
                 rslt.next();
                 do
                 {
-                    elementos.add(rslt.getString("nombreProducto"));
+                    //Solo considera las que estan pendientes mas no canceladas o realizadas
+                    if( rslt.getString("tipo").equals("Pendiente") )
+                    {
+                        elementos.add(rslt.getString("nombreProducto"));
+                    }
                 }while(rslt.next());
         }
         catch (SQLException ex)
@@ -162,5 +167,4 @@ public class Consulta
         return elementos;
     }
 
-    
 }
