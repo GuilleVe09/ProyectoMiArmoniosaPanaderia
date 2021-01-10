@@ -63,7 +63,6 @@ public class P_LoggedIn extends ConexionBD
                     
                     break;    
                 case 2:
-<<<<<<< HEAD
                     int numero;
                     int eleccion;
 
@@ -85,16 +84,6 @@ public class P_LoggedIn extends ConexionBD
                     }
 
 
-=======
-                    
-
-                    obj.consultarPendientes(this.ID);
-
-                    break;
-                case 3:
-                    consultarProductosPropios(this.ID);
-                    
->>>>>>> 8c97a3145f0a6d47c283833af2d7b180acf52d24
                     break;
             }
         }while(opcion < 4 & opcion > 0);
