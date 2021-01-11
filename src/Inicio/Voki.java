@@ -216,7 +216,7 @@ public class Voki
                                 System.out.println("apellido:");
                                 apellidoP = sn.nextLine();
                                 //apellidoP = sn.next().charAt(50);
-                                System.out.println("Producto Favorito:");
+                                System.out.println("Producto Estrella:");
                                 pEstP = sn.nextLine();
                                 //pEstP = sn.next().charAt(20);
                                 System.out.println("Direccion:");
